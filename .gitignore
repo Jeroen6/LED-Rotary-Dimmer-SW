@@ -1,0 +1,6 @@
+*.crf
+*.d
+*.o
+*.lst
+*.lnp
+*.bak

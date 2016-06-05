@@ -1,0 +1,9 @@
+Buglist:
+- Onopgelost
+x Opgelost
+* Functie uitgeschakeld
+? Oorzaak niet vastgesteld
+[ Oorzaak ]
+
+Lijst van boven aanvullen
+----------

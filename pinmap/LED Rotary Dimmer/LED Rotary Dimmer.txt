@@ -1,0 +1,88 @@
+Configuration	LED Rotary Dimmer
+STM32CubeMX 	4.14.0
+Date	06/05/2016
+MCU	STM32F051K4Tx
+
+
+
+PERIPHERALS	MODES	FUNCTIONS	PINS
+ADC	IN0	ADC_IN0	PA0
+ADC	Single-ended	ADC_TempSens_Input	VP_ADC_TempSens_Input
+ADC	Vrefint Channel	ADC_Vref_Input	VP_ADC_Vref_Input
+ADC	Vbat Channel	ADC_Vbat_Input	VP_ADC_Vbat_Input
+COMP1	INP	COMP1_INP	PA1
+DAC1	DAC_OUT1	DAC1_OUT1	PA4
+I2C1	I2C	I2C1_SCL	PB6
+I2C1	I2C	I2C1_SDA	PB7
+RCC	Crystal/Ceramic Resonator	RCC_OSC_IN	PF0-OSC_IN
+RCC	Crystal/Ceramic Resonator	RCC_OSC_OUT	PF1-OSC_OUT
+SYS	Serial-WireDebug	SYS_SWCLK	PA14
+SYS	Serial-WireDebug	SYS_SWDIO	PA13
+SYS	SysTick	SYS_VS_Systick	VP_SYS_VS_Systick
+TIM1	Input Capture direct mode	TIM1_CH1	PA8
+TIM1	Input Capture direct mode	TIM1_CH2	PA9
+TIM2	Input Capture direct mode	TIM2_CH1	PA15
+TIM2	Input Capture direct mode	TIM2_CH2	PB3
+TIM3	PWM Generation CH1	TIM3_CH1	PB4
+TIM3	PWM Generation CH2	TIM3_CH2	PA7
+TIM3	PWM Generation CH3	TIM3_CH3	PB0
+TIM3	PWM Generation CH4	TIM3_CH4	PB1
+TIM15	PWM Generation CH1	TIM15_CH1	PA2
+TIM15	PWM Generation CH2	TIM15_CH2	PA3
+TIM16	Enable_Timer	TIM16_VS_ClockSourceINT	VP_TIM16_VS_ClockSourceINT
+TIM16	PWM Generation CH1	TIM16_CH1	PA6
+
+
+
+Pin Nb	PINs	FUNCTIONs	LABELs
+2	PF0-OSC_IN	RCC_OSC_IN	
+3	PF1-OSC_OUT	RCC_OSC_OUT	
+6	PA0	ADC_IN0	
+7	PA1	COMP1_INP	
+8	PA2	TIM15_CH1	
+9	PA3	TIM15_CH2	
+10	PA4	DAC1_OUT1	
+12	PA6	TIM16_CH1	
+13	PA7	TIM3_CH2	
+14	PB0	TIM3_CH3	
+15	PB1	TIM3_CH4	
+18	PA8	TIM1_CH1	
+19	PA9	TIM1_CH2	
+20	PA10	GPIO_Input	
+22	PA12	GPIO_Input	
+23	PA13	SYS_SWDIO	
+24	PA14	SYS_SWCLK	
+25	PA15	TIM2_CH1	
+26	PB3	TIM2_CH2	
+27	PB4	TIM3_CH1	
+28	PB5	GPIO_Output	
+29	PB6	I2C1_SCL	
+30	PB7	I2C1_SDA	
+
+
+
+SOFTWARE PROJECT
+
+Project Settings : 
+Project Name : LED Rotary Dimmer
+Project Folder : C:\Users\Jeroen\ownCloud\Projects\0 Multi\LED Rotary Dimmer\software\pinmap\gen\LED Rotary Dimmer
+Toolchain / IDE : MDK-ARM V4
+Firmware Package Name and Version : STM32Cube FW_F0 V1.5.0
+
+
+Code Generation Settings : 
+STM32Cube Firmware Library Package : Copy all used libraries into the project folder
+Generate peripheral initialization as a pair of '.c/.h' files per IP : No
+Backup previously generated files when re-generating : No
+Delete previously generated files when not re-generated : Yes
+Set all free pins as analog (to optimize the power consumption) : No
+
+
+Toolchains Settings : 
+Compiler Optimizations : Balanced Size/Speed
+
+
+
+
+
+
