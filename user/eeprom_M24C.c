@@ -31,6 +31,7 @@ const uint16_t eeprom_default_chipsize 		= 0x0080;
 /* Private variables (static forbids external use) ---------------------------*/
 static uint8_t eeprom_current_chipselect 	= 0;
 static uint16_t eeprom_current_chipsize 	= 0;
+static I2C_HandleTypeDef I2C_Handle;
 
 /* Private functions ---------------------------------------------------------*/
 
@@ -39,7 +40,18 @@ static uint16_t eeprom_current_chipsize 	= 0;
  * @brief Initialize EEPROM module.
  */
 void eeprom_init(void){
-	
+	I2C_Handle.Instance = I2C1;
+  I2C_Handle.Instance = I2C1;
+  I2C_Handle.Init.Timing = 0x2000090E;
+  I2C_Handle.Init.OwnAddress1 = 0;
+  I2C_Handle.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
+  I2C_Handle.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
+  I2C_Handle.Init.OwnAddress2 = 0;
+  I2C_Handle.Init.OwnAddress2Masks = I2C_OA2_NOMASK;
+  I2C_Handle.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
+  I2C_Handle.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
+  HAL_I2C_Init(&I2C_Handle);
+	HAL_I2CEx_ConfigAnalogFilter(&I2C_Handle, I2C_ANALOGFILTER_ENABLE);
 }
 
 /**
@@ -48,8 +60,8 @@ void eeprom_init(void){
  * @paramp[in] bytes	Chip size.
  */
 void eeprom_chipselect(uint8_t e, uint16_t bytes){
-	eeprom_current_chipselect = e
-	eeprom_current_chipsize = bytes
+	eeprom_current_chipselect = e;
+	eeprom_current_chipsize = bytes;
 }
 
 /**
@@ -60,7 +72,28 @@ void eeprom_chipselect(uint8_t e, uint16_t bytes){
  * @retval -1	Failure
  */
 int eeprom_read(uint16_t address, uint8_t *dst){
-	
+	HAL_StatusTypeDef result;
+	result = HAL_I2C_Mem_Read(&I2C_Handle, 
+														eeprom_current_chipselect<<1,
+														address,
+														1,
+														dst,
+														1,
+														10
+														);
+	switch(result){
+		case HAL_OK:
+			return 1;
+		case HAL_ERROR:
+			break;
+		case HAL_BUSY:
+			break;
+		case HAL_TIMEOUT:
+			break;
+		default:
+			break;		
+	}
+	return -1;
 }
 
 /**
@@ -71,7 +104,28 @@ int eeprom_read(uint16_t address, uint8_t *dst){
  * @retval -1	Failure
  */
 int eeprom_write(uint16_t address, const uint8_t *src){
-	
+	HAL_StatusTypeDef result;
+	result = HAL_I2C_Mem_Write(&I2C_Handle, 
+														eeprom_current_chipselect<<1,
+														address,
+														1,
+														(uint8_t*)src,
+														1,
+														10
+														);
+	switch(result){
+		case HAL_OK:
+			return 1;
+		case HAL_ERROR:
+			break;
+		case HAL_BUSY:
+			break;
+		case HAL_TIMEOUT:
+			break;
+		default:
+			break;		
+	}
+	return -1;
 }
 
 /**
@@ -83,7 +137,28 @@ int eeprom_write(uint16_t address, const uint8_t *src){
  * @retval -1	Failure
  */
 int eeprom_read_block(uint16_t address, uint8_t *dst, uint16_t length){
-	
+	HAL_StatusTypeDef result;
+	result = HAL_I2C_Mem_Read(&I2C_Handle, 
+														eeprom_current_chipselect<<1,
+														address,
+														1,
+														dst,
+														length,
+														10
+														);
+	switch(result){
+		case HAL_OK:
+			return 1;
+		case HAL_ERROR:
+			break;
+		case HAL_BUSY:
+			break;
+		case HAL_TIMEOUT:
+			break;
+		default:
+			break;		
+	}
+	return -1;
 }
 
 /**
@@ -95,7 +170,28 @@ int eeprom_read_block(uint16_t address, uint8_t *dst, uint16_t length){
  * @retval -1	Failure
  */
 int eeprom_write_block(uint16_t address, const uint8_t *src, uint16_t length){
-	
+	HAL_StatusTypeDef result;
+	result = HAL_I2C_Mem_Write(&I2C_Handle, 
+														eeprom_current_chipselect<<1,
+														address,
+														1,
+														(uint8_t *)src,
+														length,
+														10
+														);
+	switch(result){
+		case HAL_OK:
+			return 1;
+		case HAL_ERROR:
+			break;
+		case HAL_BUSY:
+			break;
+		case HAL_TIMEOUT:
+			break;
+		default:
+			break;		
+	}
+	return -1;
 }
 /**
  * @}

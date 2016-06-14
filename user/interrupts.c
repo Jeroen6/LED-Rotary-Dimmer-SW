@@ -34,11 +34,14 @@ void IT_RemapVectorTable(void){
 	uint16_t i;
 	uint32_t *flashVectorTable = (void*)flash_full.base;
 	uint32_t *sramVectorTable = (void*)sram_main.base;
+	
 	for(i=0; i<0x100; i++){
 		*sramVectorTable++ = *flashVectorTable++;
 	}
   // Remap RAM into 0x0000 0000
+	__disable_irq();
   __HAL_SYSCFG_REMAPMEMORY_SRAM();
+	__enable_irq();
 }
 
 /** 

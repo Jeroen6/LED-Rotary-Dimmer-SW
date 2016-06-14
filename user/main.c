@@ -42,7 +42,7 @@
 
 /* Private macro -------------------------------------------------------------*/
 
-/* Private variables (static forbids external use) ----------------------------*/
+/* Private variables (static forbids external use) ---------------------------*/
 
 /* Private functions ---------------------------------------------------------*/
 
@@ -56,6 +56,7 @@ int main(void){
 	InitMCU();
 	InitGPIO();
 	mem_initiate_parity();	// untested, option bytes not programmable with HAL, it seems.
+	encoder_init_all();
 	
 	// Superloop
 	while(1){
