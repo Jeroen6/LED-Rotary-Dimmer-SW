@@ -458,6 +458,16 @@
               <FileType>5</FileType>
               <FilePath>.\CMSIS\Include\core_cmSimd.h</FilePath>
             </File>
+            <File>
+              <FileName>memories.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\user\memories.c</FilePath>
+            </File>
+            <File>
+              <FileName>memories.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\user\memories.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -494,14 +504,29 @@
               <FilePath>.\user\interrupts.h</FilePath>
             </File>
             <File>
-              <FileName>memories.c</FileName>
+              <FileName>controller.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\user\memories.c</FilePath>
+              <FilePath>.\user\controller.c</FilePath>
             </File>
             <File>
-              <FileName>memories.h</FileName>
+              <FileName>controller.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\user\memories.h</FilePath>
+              <FilePath>.\user\controller.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>User-drivers</GroupName>
+          <Files>
+            <File>
+              <FileName>encoder.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\user\encoder.c</FilePath>
+            </File>
+            <File>
+              <FileName>encoder.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\user\encoder.h</FilePath>
             </File>
             <File>
               <FileName>eeprom_M24C.c</FileName>
@@ -514,14 +539,24 @@
               <FilePath>.\user\eeprom_M24C.h</FilePath>
             </File>
             <File>
-              <FileName>encoder.c</FileName>
+              <FileName>button.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\user\encoder.c</FilePath>
+              <FilePath>.\user\button.c</FilePath>
             </File>
             <File>
-              <FileName>encoder.h</FileName>
+              <FileName>button.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\user\encoder.h</FilePath>
+              <FilePath>.\user\button.h</FilePath>
+            </File>
+            <File>
+              <FileName>pwm.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\user\pwm.c</FilePath>
+            </File>
+            <File>
+              <FileName>pwm.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\user\pwm.h</FilePath>
             </File>
           </Files>
         </Group>

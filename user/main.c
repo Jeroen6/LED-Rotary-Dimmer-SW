@@ -28,6 +28,10 @@
 #include "InitMCU.h"
 #include "stm32f0xx_hal.h"
 
+#include "encoder.h"
+#include "button.h"
+#include "eeprom_M24C.h"
+
 /* Settings ------------------------------------------------------------------*/
 #define ENABLE_READOUTPROTECTION	1		/// Enable to prevent reading of flash contents using jtag
 #define ENABLE_FLASHSELFTEST			1		/// Enable to check flash integrity every boot
