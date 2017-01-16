@@ -68,19 +68,37 @@ static void encoder_init_tim2(void){
 	// reset the counter before we use it
 	TIM2->CNT = 0x0000;
 }
+
+// Getters and setters of encoder timers.
 static uint32_t encoder_read_tim1(void){
 	return TIM1->CNT;
 }
 static uint32_t encoder_read_tim2(void){
 	return TIM1->CNT;
 }
-
+static void encoder_write_tim1(uint32_t t){
+	TIM1->CNT = t;
+}
+static void encoder_write_tim2(uint32_t t){
+	TIM1->CNT = t;
+}
 
 /* Settings ------------------------------------------------------------------*/
-uint32_t (* const encoder[])(void) = {
+/**
+ * @brief Get and Set index table.
+ */
+uint32_t (* const enc_read[])(void) = {
 	encoder_read_tim1,
 	encoder_read_tim2
 };
+void (* const enc_write[])(uint32_t) = {
+	encoder_write_tim1,
+	encoder_write_tim2
+};
+/**
+ * @brief maximum amplitude of encoder_readlog;
+ */
+const int speedCmax = 100;
 
 /* Interrupt shared variables ------------------------------------------------*/
 
@@ -93,7 +111,7 @@ uint32_t (* const encoder[])(void) = {
 /* Private macro -------------------------------------------------------------*/
 
 /* Private variables (static forbids external use) ---------------------------*/
-static int32_t lastPoll[ENCODER_COUNT];
+static uint32_t positionZ1[ENCODER_COUNT];
 
 /* Exported functions --------------------------------------------------------*/
 /**
@@ -109,34 +127,61 @@ void encoder_init_all(){
  * @param[in] encoder index	0 to ENCODER_COUNT-1
  * @retval moved steps since last poll. (any poll)
  */
-int32_t read_relative(uint8_t enc){
+int32_t encoder_read_relative(uint8_t enc){
 	if(enc < ENCODER_COUNT){
-		int32_t t = encoder[enc]();
+		uint32_t t = enc_read[enc]() - positionZ1[enc];
+		positionZ1[enc] = t;
+		return t - positionZ1[enc];
+	}
+	return 0;
+}
+
+/**
+ * @brief Read relative encoder movement multiplied with speed.
+ * @param[in] encoder index	0 to ENCODER_COUNT-1
+ * @retval moved steps since last poll. (any poll)
+ */
+int32_t encoder_read_log(uint8_t enc){	
+	if(enc < ENCODER_COUNT){	
+		int t, speed, speedC, direction, position;
+		// Print Encoder Quadrature count to debug port every 0.5 seconds
+		position = enc_read[enc]() / 4; // Get current position from Encoder
+		
+		// Differentiate position
+		speed = position - positionZ1[enc];
+						
+		// Direction
+		if(speed > 0){
+			direction = 1;
+		}else{ 
+			direction = -1;
+		}				
+		
+		// n-1
+		positionZ1[enc] = position;
+
+		// Clamp absoulte speed
+		if(speedC < 0 ) speedC *= -1;
+		if(speedC < speedCmax*-1) speedC = speedCmax*-1;
+		if(speedC > speedCmax) speedC = speedCmax;	
+		
+		// Logaritmify speed	
+		const uint16_t logaritmify_speed[] = {
+			/* 0 */	0,
+			/* 1 */ 1,
+			/* 2 */ 5,
+			/* 3 */ 50,
+			/* 4 */ 100,
+			/* 5 */ 150	,
+			/* 6 */ 500	,
+			/* 7 */ 750
+		};
+
+		t = logaritmify_speed[speedC] * direction;
+		
 		return t;
 	}
 	return 0;
-}
-
-/**
- * @brief Read absolute encoder position since reset_absolute().
- * @param[in] encoder	index 0 to ENCODER_COUNT-1
- * @retval moved steps since last poll. (any poll)
- */
-int32_t read_absolute(uint8_t enc){
-	if(enc < ENCODER_COUNT){
-		(void)lastPoll;
-	}
-	return 0;
-}
-
-/**
- * @brief Reset absolute encoder position.
- * @param[in] encoder	index 0 to ENCODER_COUNT-1
- */
-void reset_absolute(uint8_t enc){
-	if(enc < ENCODER_COUNT){
-		
-	}
 }
 /**
  * @}

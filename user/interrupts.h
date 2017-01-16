@@ -17,6 +17,7 @@
 #include "stm32f0xx_hal.h"
 
 /* Exported variables---------------------------------------------------------*/
+extern volatile uint32_t systime;
 extern volatile int exitCode;
 /* Exported types ------------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/

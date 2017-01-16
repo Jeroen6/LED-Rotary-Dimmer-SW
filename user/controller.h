@@ -15,6 +15,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f0xx.h"
 #include "stm32f0xx_hal.h"
+#include "button.h"
 
 /* Settings ------------------------------------------------------------------*/
 /* Exported variables---------------------------------------------------------*/
@@ -46,7 +47,7 @@ typedef void*(*state_t)(Ctrl_t *p);
 struct Ctrl_t {
 	/* inputs */
 	uint8_t enc_in;					//< Input index encoder.
-	uint8_t enc_pushbutton;	//< Input index pushbutton.
+	ButtonState button;	//< Input pushbutton.
 	/* outputs */
 	uint8_t ch_out;					//< PWM channel index for output channel.
 	uint8_t enc_led;				//< PWM channel index for encoder led.
@@ -65,6 +66,6 @@ struct Ctrl_t {
 void controller_init(Ctrl_t *instance);
 void controller_execute(Ctrl_t *instance);
 
-#endif /* __EEMPROM_M24C_H_ */
+#endif /* __CONTOROLLER_H_ */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

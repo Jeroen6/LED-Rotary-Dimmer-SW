@@ -31,6 +31,8 @@
 #include "encoder.h"
 #include "button.h"
 #include "eeprom_M24C.h"
+#include "pwm.h"
+#include "controller.h"
 
 /* Settings ------------------------------------------------------------------*/
 #define ENABLE_READOUTPROTECTION	1		/// Enable to prevent reading of flash contents using jtag
@@ -39,6 +41,8 @@
 /* Interrupt shared variables ------------------------------------------------*/
 
 /* Public --------------------------------------------------------------------*/
+Ctrl_t ch1_ctrlr, ch2_ctrlr;
+Button_t ch1_btn, ch2_btn;
 
 /* Private typedef -----------------------------------------------------------*/
 
@@ -61,9 +65,27 @@ int main(void){
 	InitGPIO();
 	mem_initiate_parity();	// untested, option bytes not programmable with HAL, it seems.
 	encoder_init_all();
+	pwm_init();
+	eeprom_init();
+	controller_init(&ch1_ctrlr);
+	controller_init(&ch2_ctrlr);
+	button_init(&ch1_btn);
+	button_init(&ch2_btn);
 	
 	// Superloop
 	while(1){
+		uint8_t t;
+		// Execute
+		t = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0);
+		ch1_ctrlr.button = button_execute(&ch1_btn, systime, t);
+		t = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_5);
+		ch2_ctrlr.button = button_execute(&ch2_btn, systime, t);
+		
+
+		
+		controller_execute(&ch1_ctrlr);
+		controller_execute(&ch2_ctrlr);
+		
 		// Wait for interrupt
 		__wfi();
 		// Watchdog, only location reloading of watchdog is allowed by design.

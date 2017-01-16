@@ -8,8 +8,8 @@
   */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __EEMPROM_M24C_H_
-#define __EEMPROM_M24C_H_
+#ifndef __ENCODER_H_
+#define __ENCODER_H_
 #include <stdint.h>
 
 /* Includes ------------------------------------------------------------------*/
@@ -25,8 +25,7 @@
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions --------------------------------------------------------*/
 void encoder_init_all(void);
-int32_t read_relative(uint8_t encoder);
-int32_t read_absolute(uint8_t encoder);
-void reset_absolute(uint8_t encoder);
+int32_t encoder_read_relative(uint8_t encoder);
+int32_t encoder_read_log(uint8_t encoder);
 
-#endif /* __EEMPROM_M24C_H_ */
+#endif /* __ENCODER_H_ */

@@ -19,12 +19,17 @@
 /* Settings ------------------------------------------------------------------*/
 /* Exported variables---------------------------------------------------------*/
 /* Exported types ------------------------------------------------------------*/
-/* Private define ------------------------------------------------------------*/
+/* Exported define -----------------------------------------------------------*/
+#define PWM_CH1			0
+#define PWM_CH2			1	
+#define PWM_CH1_R		2
+#define PWM_CH1_G		3
+#define PWM_CH2_R		4
+#define PWM_CH2_G		5
 /* Exported constants --------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions --------------------------------------------------------*/
 void pwm_init(void);
-void pwm_out_set(int16_t duty);
-void pwm_led_set(int16_t duty);
+void pwm_set(uint8_t ch, int16_t duty);
 
 #endif /* __PWM_USER_H_ */

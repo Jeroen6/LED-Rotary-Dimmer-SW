@@ -1,10 +1,10 @@
 /**
   ******************************************************************************
-  * @file    eeprom_M24C.c
+  * @file    button.c
   * @author  JLO
   * @version V1.0.0
   * @date    February 2015
-  * @brief   API to use ST M24C EEPROM over I2C
+  * @brief   
 	*
 	* @detail  
 	*					 

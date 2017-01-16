@@ -74,7 +74,8 @@ void controller_execute(Ctrl_t *p){
 }
 
 /** 
- * @brief 
+ * @brief Entry state.
+ * @detail Check previous channel setting and resume operation.
  * @param[in] pointer to previous state
  * @return pointer to next state
  */
@@ -82,7 +83,7 @@ static void* s00_entry(Ctrl_t *p){
 	return s00_entry;
 }
 /** 
- * @brief 
+ * @brief Channel Off operation.
  * @param[in] pointer to previous state
  * @return pointer to next state
  */
